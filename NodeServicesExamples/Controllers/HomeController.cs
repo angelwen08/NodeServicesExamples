@@ -35,6 +35,14 @@ namespace NodeServicesExamples.Controllers
             return View();
         }
 
+        public async Task<IActionResult> TestMyNpm([FromServices] INodeServices nodeServices)
+        {
+            
+            ViewData["hello"] = await nodeServices.InvokeAsync<string>("./Node/renderMyNpm");
+
+            return View();
+        }
+
         public async Task<IActionResult> Prerendering([FromServices] ISpaPrerenderer prerenderer)
         {
             var result = await prerenderer.RenderToString("./Node/prerenderPage");
