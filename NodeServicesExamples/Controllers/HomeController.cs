@@ -30,7 +30,7 @@ namespace NodeServicesExamples.Controllers
                 }
             };
 
-            ViewData["ChartMarkup"] = await nodeServices.InvokeAsync<string>("./Node/renderChart", "line", options, data);
+            ViewData["ChartMarkup"] = await nodeServices.InvokeAsync<string>("./wwwroot/js/renderChart", "line", options, data);
 
             return View();
         }
@@ -38,14 +38,14 @@ namespace NodeServicesExamples.Controllers
         public async Task<IActionResult> TestMyNpm([FromServices] INodeServices nodeServices)
         {
             
-            ViewData["hello"] = await nodeServices.InvokeAsync<string>("./Node/renderMyNpm");
+            ViewData["hello"] = await nodeServices.InvokeAsync<string>("./wwwroot/js/renderMyNpm");
 
             return View();
         }
 
         public async Task<IActionResult> Prerendering([FromServices] ISpaPrerenderer prerenderer)
         {
-            var result = await prerenderer.RenderToString("./Node/prerenderPage");
+            var result = await prerenderer.RenderToString("./wwwroot/js/prerenderPage");
 
             if (!string.IsNullOrEmpty(result.RedirectUrl))
             {
